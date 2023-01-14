@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
+using System.Web.Mvc;
 using HospitalManagementAPI.Models;
 using HospitalManagementAPI.Repository;
 using HospitalManagementAPI.Services;
@@ -14,9 +15,18 @@ namespace HospitalManagementAPI.Controllers
        
          private IUserservice _userManager = new UserService();
 
+        //GET: api/User
+        public async Task<IHttpActionResult> GetAllUser()
+        {
+            return Ok("Welcome to Hospital Management API" +
+                " Endpoints :" +
+                " * POST: api/User/5(LOGIN) " +
+                " * GET: api/User/ID(GET_USER_BY_ID)" +
+                " * POST: api/Appointment(ADD APPOINTMENT) " +
+                " * GET: api/Appointment?userid=YOURID&date=YOURDATE(GET_APPOINTMENT_BY_DATE = yyyy-mm-dd)");
+        }
 
-        // POST: api/User
-
+        // POST: api/User/5
         public async Task<IHttpActionResult>  PostLogin([FromBody] LoginUser userLogin)
         {
             if (ModelState.IsValid)
@@ -44,12 +54,7 @@ namespace HospitalManagementAPI.Controllers
         }
 
 
-        // GET: api/User
-        //public async IQueryable<userLogin> GetAllUser()
-        //{
-        //    var allUser = await _userManager.GetAllUser();
-        //    return allUser;
-        //}
+  
 
         // PUT: api/User/5
         //public async Task<IHttpActionResult> PutuserLogin(int id, userLogin userLogin)
