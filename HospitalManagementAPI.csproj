@@ -140,6 +140,7 @@
       <DependentUpon>HospitalDbContext.edmx</DependentUpon>
       <LastGenOutput>HospitalDbContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Readme.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
