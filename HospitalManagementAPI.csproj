@@ -197,6 +197,7 @@
     <Content Include="HospitalDbContext.edmx.diagram">
       <DependentUpon>HospitalDbContext.edmx</DependentUpon>
     </Content>
+    <Content Include="HospitalManagementDB" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
