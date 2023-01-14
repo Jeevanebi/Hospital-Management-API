@@ -1,36 +1,39 @@
 ﻿
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 using HospitalManagementAPI.Models;
 using HospitalManagementAPI.Repository;
 using HospitalManagementAPI.Services;
+//using HospitalManagementAPI.Services;
 
 namespace HospitalManagementAPI.Controllers
 {
     public class UserController : ApiController
     {
-        private readonly IUserManager _userManager;
+       
+         private IUserservice _userManager = new UserService();
 
-        public UserController(IUserManager userManager)
+
+        // POST: api/User
+
+        public async Task<IHttpActionResult>  PostLogin([FromBody] LoginUser userLogin)
         {
-            _userManager = userManager;
-        }
-
-
-        // POST: api/Login
-        public async Task<IHttpActionResult> LoginUser([FromBody] LoginUser userLogin)
-        {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var authUser = await _userManager.LoginUser(userLogin, userLogin.Password);
                 return Ok(authUser);
             };
-            return BadRequest("Please Fill the Required Data");
+            var Notfound = new UserResponseManager
+            {
+                Response = false,
+                Message = "Please Fill the Required Data"
+            };
+            return Ok(Notfound);
         }
 
-        // GET: api/User/5
-        [HttpGet()]
-        public async Task<IHttpActionResult> GetUserById(int id)
+        // GET: api/User/ID
+        public async Task<IHttpActionResult> GetUserData(int id)
         {
             if(id != 0)
             {

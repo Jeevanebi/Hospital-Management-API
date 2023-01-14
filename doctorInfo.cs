@@ -12,8 +12,13 @@ namespace HospitalManagementAPI
     using System;
     using System.Collections.Generic;
     
-    public partial class Entity1
+    public partial class doctorInfo
     {
-        public int Id { get; set; }
+        public int doctorId { get; set; }
+        public string doctorName { get; set; }
+        public string appointmentDetails { get; set; }
+        public int ap_id { get; set; }
+    
+        public virtual appoinmentInfo appoinmentInfo { get; set; }
     }
 }

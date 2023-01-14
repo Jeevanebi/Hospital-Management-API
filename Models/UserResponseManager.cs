@@ -14,8 +14,6 @@ namespace HospitalManagementAPI.Models
 
         public userLogin Data { get; set; }
 
-        public string Error { get; set; }
-
-        public string Expires { get; set; }
     }
+
 }

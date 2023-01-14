@@ -12,21 +12,21 @@ namespace HospitalManagementAPI
     using System;
     using System.Collections.Generic;
     
-    public partial class userLogin
+    public partial class appoinmentInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public userLogin()
+        public appoinmentInfo()
         {
-            this.appoinmentInfoes = new HashSet<appoinmentInfo>();
+            this.doctorInfoes = new HashSet<doctorInfo>();
         }
     
+        public int ap_id { get; set; }
         public int userid { get; set; }
-        public string username { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public string userType { get; set; }
+        public Nullable<System.DateTime> appointmentDate { get; set; }
+        public Nullable<System.TimeSpan> appointmentTime { get; set; }
     
+        public virtual userLogin userLogin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<appoinmentInfo> appoinmentInfoes { get; set; }
+        public virtual ICollection<doctorInfo> doctorInfoes { get; set; }
     }
 }
