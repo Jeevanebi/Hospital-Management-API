@@ -18,7 +18,7 @@ namespace HospitalManagementAPI.Controllers
         //GET: api/User
         public async Task<IHttpActionResult> GetAllUser()
         {
-            return Ok("Welcome to Hospital Management API" +
+             return Ok("Welcome to Hospital Management API" +
                 " Endpoints :" +
                 " * POST: api/User/5(LOGIN) " +
                 " * GET: api/User/ID(GET_USER_BY_ID)" +
