@@ -12,30 +12,25 @@ namespace HospitalManagementAPI.Services
 {
     public class UserService : IUserservice
     {
-        HospitalDbEntities1 _context = new HospitalDbEntities1();
+        db_9f24e4_voywellnessEntities _context = new db_9f24e4_voywellnessEntities();
 
         public async Task<UserResponseManager> LoginUser(LoginUser model, string password)
         {
 
-            var userLogin =  _context.userLogins.SingleOrDefault(x => x.username == model.Username);
+            var userLogin =  _context.Users.SingleOrDefault(x => x.UserName == model.Username);
             //var passwordDecoded = VerifyPasswordHash(password, userLogin.passwordSalt, userLogin.passwordSalt);
 
             if (userLogin != null)
             {
-                if (userLogin.password == password)
+                if (userLogin.Password == password)
                 {
                     //var getToken = GenerateToken(model);
                     return new UserResponseManager
                     {
                         Response = true,
                         Message = "User '" + model.Username + "' Logged In !",
-                        Data = new userLogin
-                        {
-                            userid = userLogin.userid,
-                            username = userLogin.username,
-                            email = userLogin.email,
-                            userType = userLogin.userType
-                        }
+                        Data = userLogin
+                      
                     };
                 }
             }
@@ -50,7 +45,7 @@ namespace HospitalManagementAPI.Services
         public async Task<UserResponseManager> GetUserByID(int id)
         {
 
-            userLogin userLogin = await _context.userLogins.FindAsync(id);
+            User userLogin = await _context.Users.FindAsync(id);
 
             if (userLogin != null)
             {
@@ -58,13 +53,8 @@ namespace HospitalManagementAPI.Services
                 {
                     Response = true,
                     Message = "User Found for User Id : " + id,
-                    Data = new userLogin
-                    {
-                        userid = userLogin.userid,
-                        username = userLogin.username,
-                        email = userLogin.email,
-                        userType = userLogin.userType
-                    }
+                    Data =  userLogin
+                   
                 };
             }
             return new UserResponseManager

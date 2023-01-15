@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_9f24e4_voywellnessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointment_Status">
+          <Key>
+            <PropertyRef Name="Appointment_Status_Id" />
+          </Key>
+          <Property Name="Appointment_Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description_En" Type="varchar" MaxLength="250" />
+          <Property Name="Description_Ar" Type="nvarchar" MaxLength="250" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="Insert_By" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Insert_Date" Type="datetime" Nullable="false" />
+          <Property Name="Update_By" Type="nvarchar" MaxLength="50" />
+          <Property Name="Update_date" Type="datetime" />
+          <Property Name="ISHide" Type="bit" />
+        </EntityType>
+        <EntityType Name="Register_Appointment">
+          <Key>
+            <PropertyRef Name="Appoitment_Id" />
+          </Key>
+          <Property Name="Appoitment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Register_Id" Type="int" />
+          <Property Name="Appoitment_Date" Type="datetime" />
+          <Property Name="Appoitment_Time" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Inserted_time" Type="datetime" />
+          <Property Name="FK_CustomerID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="250" />
+          <Property Name="UserArName" Type="nvarchar" MaxLength="250" />
+          <Property Name="UserFullName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="FK_BranchId" Type="int" />
+          <Property Name="FK_CustomerID" Type="int" />
+          <Property Name="Level" Type="int" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="ISHide" Type="bit" />
+          <Property Name="Allow_Delete" Type="int" />
+          <Property Name="Allow_Edit" Type="int" />
+          <Property Name="Allow_Select" Type="int" />
+          <Property Name="FK_Trainer_Id" Type="int" />
+          <Property Name="Is_Trainer" Type="int" />
+        </EntityType>
+        <EntityContainer Name="db_9f24e4_voywellnessModelStoreContainer">
+          <EntitySet Name="Appointment_Status" EntityType="Self.Appointment_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Register_Appointment" EntityType="Self.Register_Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_9f24e4_voywellnessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Appointment_Status">
+          <Key>
+            <PropertyRef Name="Appointment_Status_Id" />
+          </Key>
+          <Property Name="Appointment_Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description_En" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description_Ar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Insert_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Insert_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Update_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Update_date" Type="DateTime" Precision="3" />
+          <Property Name="ISHide" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Register_Appointment">
+          <Key>
+            <PropertyRef Name="Appoitment_Id" />
+          </Key>
+          <Property Name="Appoitment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Register_Id" Type="Int32" />
+          <Property Name="Appoitment_Date" Type="DateTime" Precision="3" />
+          <Property Name="Appoitment_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Inserted_time" Type="DateTime" Precision="3" />
+          <Property Name="FK_CustomerID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserArName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserFullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="FK_BranchId" Type="Int32" />
+          <Property Name="FK_CustomerID" Type="Int32" />
+          <Property Name="Level" Type="Int32" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="ISHide" Type="Boolean" />
+          <Property Name="Allow_Delete" Type="Int32" />
+          <Property Name="Allow_Edit" Type="Int32" />
+          <Property Name="Allow_Select" Type="Int32" />
+          <Property Name="FK_Trainer_Id" Type="Int32" />
+          <Property Name="Is_Trainer" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="db_9f24e4_voywellnessEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointment_Status" EntityType="Self.Appointment_Status" />
+          <EntitySet Name="Register_Appointment" EntityType="Self.Register_Appointment" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_9f24e4_voywellnessModelStoreContainer" CdmEntityContainer="db_9f24e4_voywellnessEntities">
+          <EntitySetMapping Name="Appointment_Status">
+            <EntityTypeMapping TypeName="db_9f24e4_voywellnessModel.Appointment_Status">
+              <MappingFragment StoreEntitySet="Appointment_Status">
+                <ScalarProperty Name="Appointment_Status_Id" ColumnName="Appointment_Status_Id" />
+                <ScalarProperty Name="Description_En" ColumnName="Description_En" />
+                <ScalarProperty Name="Description_Ar" ColumnName="Description_Ar" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Insert_By" ColumnName="Insert_By" />
+                <ScalarProperty Name="Insert_Date" ColumnName="Insert_Date" />
+                <ScalarProperty Name="Update_By" ColumnName="Update_By" />
+                <ScalarProperty Name="Update_date" ColumnName="Update_date" />
+                <ScalarProperty Name="ISHide" ColumnName="ISHide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Register_Appointment">
+            <EntityTypeMapping TypeName="db_9f24e4_voywellnessModel.Register_Appointment">
+              <MappingFragment StoreEntitySet="Register_Appointment">
+                <ScalarProperty Name="Appoitment_Id" ColumnName="Appoitment_Id" />
+                <ScalarProperty Name="Register_Id" ColumnName="Register_Id" />
+                <ScalarProperty Name="Appoitment_Date" ColumnName="Appoitment_Date" />
+                <ScalarProperty Name="Appoitment_Time" ColumnName="Appoitment_Time" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Inserted_time" ColumnName="Inserted_time" />
+                <ScalarProperty Name="FK_CustomerID" ColumnName="FK_CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="db_9f24e4_voywellnessModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserArName" ColumnName="UserArName" />
+                <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="FK_BranchId" ColumnName="FK_BranchId" />
+                <ScalarProperty Name="FK_CustomerID" ColumnName="FK_CustomerID" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="ISHide" ColumnName="ISHide" />
+                <ScalarProperty Name="Allow_Delete" ColumnName="Allow_Delete" />
+                <ScalarProperty Name="Allow_Edit" ColumnName="Allow_Edit" />
+                <ScalarProperty Name="Allow_Select" ColumnName="Allow_Select" />
+                <ScalarProperty Name="FK_Trainer_Id" ColumnName="FK_Trainer_Id" />
+                <ScalarProperty Name="Is_Trainer" ColumnName="Is_Trainer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

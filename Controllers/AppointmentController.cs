@@ -24,7 +24,7 @@ namespace HospitalManagementAPI.Controllers
         private IUserservice _userservice = new UserService();
 
         // GET: api/Appointment?userid=YOURID&date=YOURDATE
-        [ResponseType(typeof(appoinmentInfo))]
+        [ResponseType(typeof(Register_Appointment))]
         public async Task<IHttpActionResult> GetappoinmentInfo(int userid, DateTime date)
         {
             var user = await  _userservice.GetUserByID(userid);
@@ -43,7 +43,7 @@ namespace HospitalManagementAPI.Controllers
 
 
         // POST: api/Appointment
-        [ResponseType(typeof(appoinmentInfo))]
+        [ResponseType(typeof(Register_Appointment))]
         public async Task<IHttpActionResult> Postappoinments([FromBody]AppointmentModel appoinmentInfo)
         {
             if (appoinmentInfo != null)

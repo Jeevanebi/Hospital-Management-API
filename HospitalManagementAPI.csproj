@@ -130,48 +130,44 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="HospitalDbContext.Context.tt">
+    <Content Include="HospitalManagement.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HospitalDbContext.edmx</DependentUpon>
-      <LastGenOutput>HospitalDbContext.Context.cs</LastGenOutput>
+      <DependentUpon>HospitalManagement.edmx</DependentUpon>
+      <LastGenOutput>HospitalManagement.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="HospitalDbContext.tt">
+    <Content Include="HospitalManagement.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HospitalDbContext.edmx</DependentUpon>
-      <LastGenOutput>HospitalDbContext.cs</LastGenOutput>
+      <DependentUpon>HospitalManagement.edmx</DependentUpon>
+      <LastGenOutput>HospitalManagement.cs</LastGenOutput>
     </Content>
     <Content Include="Readme.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="appoinmentInfo.cs">
-      <DependentUpon>HospitalDbContext.tt</DependentUpon>
+    <Compile Include="Appointment_Status.cs">
+      <DependentUpon>HospitalManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="doctorInfo.cs">
-      <DependentUpon>HospitalDbContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AutoMapperProfile.cs" />
-    <Compile Include="HospitalDbContext.Context.cs">
+    <Compile Include="HospitalManagement.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalDbContext.Context.tt</DependentUpon>
+      <DependentUpon>HospitalManagement.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="HospitalDbContext.cs">
+    <Compile Include="HospitalManagement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalDbContext.tt</DependentUpon>
+      <DependentUpon>HospitalManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="HospitalDbContext.Designer.cs">
+    <Compile Include="HospitalManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalDbContext.edmx</DependentUpon>
+      <DependentUpon>HospitalManagement.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ServiceModels\AppointmentModel.cs" />
     <Compile Include="Models\ServiceModels\AddAppointmentModel.cs" />
@@ -181,24 +177,27 @@
     <Compile Include="Models\UserModels\UserModel.cs" />
     <Compile Include="Models\UserResponseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register_Appointment.cs">
+      <DependentUpon>HospitalManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repo\AppointmentService.cs" />
     <Compile Include="Services\IAppointmentService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Repo\UserService.cs" />
-    <Compile Include="userLogin.cs">
-      <DependentUpon>HospitalDbContext.tt</DependentUpon>
+    <Compile Include="User.cs">
+      <DependentUpon>HospitalManagement.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="HospitalDbContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HospitalDbContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="HospitalDbContext.edmx.diagram">
-      <DependentUpon>HospitalDbContext.edmx</DependentUpon>
-    </Content>
     <Content Include="HospitalManagementDB" />
+    <EntityDeploy Include="HospitalManagement.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HospitalManagement.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="HospitalManagement.edmx.diagram">
+      <DependentUpon>HospitalManagement.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -209,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,7 @@ namespace HospitalManagementAPI.Models
 
         public string Message { get; set; } 
 
-        public userLogin Data { get; set; }
+        public dynamic Data { get; set; }
 
     }
 

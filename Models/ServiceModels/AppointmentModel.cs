@@ -9,7 +9,6 @@ namespace HospitalManagementAPI.Models.ServiceModels
     {
         public int userid { get; set; }
         public DateTime AppointmentDate { get; set; }
-        public TimeSpan AppointmentTime { get; set; }
-        public doctorInfo doctor { get; set; }
+        public string AppointmentTime { get; set; }
     }
 }

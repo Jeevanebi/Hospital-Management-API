@@ -12,13 +12,16 @@ namespace HospitalManagementAPI
     using System;
     using System.Collections.Generic;
     
-    public partial class doctorInfo
+    public partial class Appointment_Status
     {
-        public int doctorId { get; set; }
-        public string doctorName { get; set; }
-        public string appointmentDetails { get; set; }
-        public int ap_id { get; set; }
-    
-        public virtual appoinmentInfo appoinmentInfo { get; set; }
+        public int Appointment_Status_Id { get; set; }
+        public string Description_En { get; set; }
+        public string Description_Ar { get; set; }
+        public string Color { get; set; }
+        public string Insert_By { get; set; }
+        public System.DateTime Insert_Date { get; set; }
+        public string Update_By { get; set; }
+        public Nullable<System.DateTime> Update_date { get; set; }
+        public Nullable<bool> ISHide { get; set; }
     }
 }
