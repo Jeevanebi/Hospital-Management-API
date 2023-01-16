@@ -11,6 +11,7 @@ using System.Data;
 
 namespace HospitalManagementAPI.Repo
 {
+
     public class AppointmentService : IAppointmentService
     {
         db_9f24e4_voywellnessEntities _context = new db_9f24e4_voywellnessEntities();
