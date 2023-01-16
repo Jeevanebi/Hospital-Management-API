@@ -18,6 +18,7 @@ using HospitalManagementAPI.Services;
 
 namespace HospitalManagementAPI.Controllers
 {
+    
     public class AppointmentController : ApiController
     {
         private IAppointmentService _appointmentContext = new AppointmentService();
@@ -25,6 +26,7 @@ namespace HospitalManagementAPI.Controllers
 
         // GET: api/Appointment?userid=YOURID&date=YOURDATE
         [ResponseType(typeof(Register_Appointment))]
+        [Authorize]
         public async Task<IHttpActionResult> GetappoinmentInfo(int userid, DateTime date)
         {
             var user = await  _userservice.GetUserByID(userid);
@@ -54,6 +56,7 @@ namespace HospitalManagementAPI.Controllers
 
         // POST: api/Appointment
         [ResponseType(typeof(Register_Appointment))]
+        [Authorize]
         public async Task<IHttpActionResult> Postappoinments([FromBody]AppointmentModel appoinmentInfo)
         {
             if (appoinmentInfo != null)

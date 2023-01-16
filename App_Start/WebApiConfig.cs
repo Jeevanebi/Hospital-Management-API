@@ -7,6 +7,7 @@ using System.Security.Policy;
 using System.Web.Http;
 using System.Web.Http.Filters;
 using System.Web.Mvc;
+using Microsoft.Owin.Security.OAuth;
 
 namespace HospitalManagementAPI
 {
@@ -15,9 +16,9 @@ namespace HospitalManagementAPI
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            //GlobalConfiguration.Configure(WebApiConfig.Register);
 
-            //config.Services.Add(typeof(IUserservice), new UserService());
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -28,14 +29,10 @@ namespace HospitalManagementAPI
                 defaults: new { id = RouteParameter.Optional }
             );
 
-
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
-
         }
-
-         
     }
 }

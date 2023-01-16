@@ -1,23 +1,20 @@
 ﻿
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
-using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using HospitalManagementAPI.Models;
 using HospitalManagementAPI.Repository;
 using HospitalManagementAPI.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Owin.Security.OAuth;
 //using HospitalManagementAPI.Services;
 
 namespace HospitalManagementAPI.Controllers
 {
+
     public class UserController : ApiController
     {
-       
-         private IUserservice _userManager = new UserService();
-
+        private IUserservice _userManager = new UserService();
         //GET: api/User
         public async Task<IHttpActionResult> GetAllUser()
         {
@@ -28,8 +25,8 @@ namespace HospitalManagementAPI.Controllers
                 " * POST: api/Appointment(ADD APPOINTMENT) " +
                 " * GET: api/Appointment?userid=YOURID&date=YOURDATE(GET_APPOINTMENT_BY_DATE = yyyy-mm-dd)");
         }
-
         // POST: api/User/5
+        [AllowAnonymous]
         public async Task<IHttpActionResult>  PostLogin([FromBody] LoginUser userLogin)
         {
             if (userLogin.Username != null && userLogin.Password != null)
@@ -58,10 +55,11 @@ namespace HospitalManagementAPI.Controllers
             return Content(HttpStatusCode.BadRequest, Notfound);
         }
 
+        [Authorize]
         // GET: api/User/ID
         public async Task<IHttpActionResult> GetUserData(int id)
         {
-            if(id != null)
+            if(id != 0)
             {
                 var getUserById = await _userManager.GetUserByID(id);
                 if (getUserById != null)
@@ -77,9 +75,6 @@ namespace HospitalManagementAPI.Controllers
             }
             return BadRequest();
         }
-
-
-  
 
         // PUT: api/User/5
         //public async Task<IHttpActionResult> PutuserLogin(int id, userLogin userLogin)
