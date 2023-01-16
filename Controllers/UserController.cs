@@ -1,8 +1,11 @@
 ﻿
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using HospitalManagementAPI.Models;
 using HospitalManagementAPI.Repository;
 using HospitalManagementAPI.Services;
@@ -29,28 +32,50 @@ namespace HospitalManagementAPI.Controllers
         // POST: api/User/5
         public async Task<IHttpActionResult>  PostLogin([FromBody] LoginUser userLogin)
         {
-            if (ModelState.IsValid)
+            if (userLogin.Username != null && userLogin.Password != null)
             {
                 var authUser = await _userManager.LoginUser(userLogin, userLogin.Password);
-                return Ok(authUser);
+                if (authUser != null)
+                {
+                    return Ok(authUser);
+                }
+                else
+                {
+                    var UserNotFoundError = new UserResponseManager
+                    {
+                        Response = false,
+                        Message = "User '" + userLogin.Username + "' is Not Authenticated"
+                    };
+
+                    return Content(HttpStatusCode.BadGateway, UserNotFoundError);
+                }
             };
             var Notfound = new UserResponseManager
             {
                 Response = false,
                 Message = "Please Fill the Required Data"
             };
-            return Ok(Notfound);
+            return Content(HttpStatusCode.BadRequest, Notfound);
         }
 
         // GET: api/User/ID
         public async Task<IHttpActionResult> GetUserData(int id)
         {
-            if(id != 0)
+            if(id != null)
             {
                 var getUserById = await _userManager.GetUserByID(id);
-                return Ok(getUserById);
+                if (getUserById != null)
+                {
+                    return Ok(getUserById);
+                }
+                var userNotFound = new UserResponseManager
+                {
+                    Response = false,
+                    Message = "User Not Found for User Id : " + id,
+                };
+                return Content(HttpStatusCode.NotFound,userNotFound);
             }
-            return NotFound();
+            return BadRequest();
         }
 
 

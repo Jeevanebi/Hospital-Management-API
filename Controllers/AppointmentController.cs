@@ -31,13 +31,23 @@ namespace HospitalManagementAPI.Controllers
             if (user != null)
             {
                 var appointments = await _appointmentContext.getAppointmentByDate(userid, date);
-                return Ok(appointments);
+                if (appointments != null)
+                {
+                    return Ok(appointments);
+                }
+                var notFoundError = new UserResponseManager
+                {
+                    Response = false,
+                    Message = "No Appointments found for the User" + userid
+                };
+                return Content(HttpStatusCode.NotFound,notFoundError);
             }
-            return Ok(new UserResponseManager
+            var invalidRequestError = new UserResponseManager
             {
                 Response = false,
-                Message = "Some properties are invalid !"
-            });
+                Message = "Invalid Request"
+            };
+           return Content(HttpStatusCode.BadRequest,invalidRequestError);
         }
 
 
@@ -49,20 +59,23 @@ namespace HospitalManagementAPI.Controllers
             if (appoinmentInfo != null)
             {
                 var userAppointment = await _appointmentContext.AddAppointment(appoinmentInfo);
-                if(userAppointment != null)
+                if (userAppointment != null)
                 {
-                    return Ok(userAppointment);
+                    return Content(HttpStatusCode.Created, userAppointment);
                 }
-            }
-            else
-            {
-                return Ok(new UserResponseManager
+                var userNotCreated = new UserResponseManager
                 {
                     Response = false,
-                    Message = "Input Model is Not Valid !"
-                });
+                    Message = "No appointments are Added for the user " + appoinmentInfo.userid
+                };
+                return Content(HttpStatusCode.BadRequest,userNotCreated);
             }
-            return CreatedAtRoute("DefaultApi", new { id = appoinmentInfo.userid }, appoinmentInfo);
+            var invalidRequestError = new UserResponseManager
+            {
+                Response = false,
+                Message = "Input Model is Not Valid !"
+            };
+            return Content(HttpStatusCode.BadRequest,invalidRequestError);
         }
 
 
