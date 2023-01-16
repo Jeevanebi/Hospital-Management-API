@@ -17,7 +17,7 @@ namespace HospitalManagementAPI.Services
         public async Task<UserResponseManager> LoginUser(LoginUser model, string password)
         {
 
-            var userLogin =  _context.Users.SingleOrDefault(x => x.UserName == model.Username);
+            var userLogin =  _context.Users.FirstOrDefault(x => x.UserName == model.Username);
             //var passwordDecoded = VerifyPasswordHash(password, userLogin.passwordSalt, userLogin.passwordSalt);
 
             if (userLogin != null)
@@ -30,15 +30,11 @@ namespace HospitalManagementAPI.Services
                         Response = true,
                         Message = "User '" + model.Username + "' Logged In !",
                         Data = userLogin
-                      
+
                     };
                 }
             }
-            return new UserResponseManager
-            {
-                Response = false,
-                Message = "User '" + model.Username + "' is Not Authenticated"
-            };
+            return null;
 
         }
 
@@ -57,14 +53,14 @@ namespace HospitalManagementAPI.Services
                    
                 };
             }
-            return new UserResponseManager
-            {
-                Response = false,
-                Message = "User Not Found for User Id : " + id,
-            };
+            return null;
         }
 
+
+
         //Additional
+
+
         //public async Task<UserResponseManager> GetAllUser()
         //{
         //    //var user =  _context.userLogins.FindAsync();

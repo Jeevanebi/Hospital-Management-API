@@ -48,10 +48,7 @@ namespace HospitalManagementAPI.Repo
                         throw;
                 }
             }
-            return new UserResponseManager
-            {
-
-            };
+            return null;
         }
 
         public async Task<UserResponseManager> getAppointmentByDate(int id, DateTime date)
@@ -77,11 +74,7 @@ namespace HospitalManagementAPI.Repo
                     Message = "User Id '" + appoinmentInfo.FK_CustomerID + "'has not added any appointments on '" + date +"'"
                 };
             }
-            return new UserResponseManager
-            {
-                Response = false,
-                Message = "No Appointments for the User"
-            };
+            return null;
         }
 
         private bool appoinmentInfoExists(int id)
