@@ -6,7 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using HospitalManagementAPI.Services;
-using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using System.Configuration;
+using HospitalManagementAPI.Models.UserModels;
 
 namespace HospitalManagementAPI.Services
 {
@@ -14,6 +19,7 @@ namespace HospitalManagementAPI.Services
     {
         db_9f24e4_voywellnessEntities _context = new db_9f24e4_voywellnessEntities();
 
+        
         public async Task<UserResponseManager> LoginUser(LoginUser model, string password)
         {
 
@@ -24,13 +30,23 @@ namespace HospitalManagementAPI.Services
             {
                 if (userLogin.Password == password)
                 {
-                    //var getToken = GenerateToken(model);
+                    var tokenClaims = new User
+                    {
+                        UserId = userLogin.UserId,
+                        UserName = userLogin.UserName,
+                        Email = userLogin.Email
+                    };
+                    string getToken = GenerateToken(tokenClaims);
                     return new UserResponseManager
                     {
                         Response = true,
                         Message = "User '" + model.Username + "' Logged In !",
-                        Data = userLogin
-
+                        Data = new TokenModel 
+                        {   Type = "JWT",
+                            User=userLogin,
+                            Token = getToken ,
+                            Expires = DateTime.Now.AddDays(1)
+                        }  
                     };
                 }
             }
@@ -57,6 +73,34 @@ namespace HospitalManagementAPI.Services
         }
 
 
+
+
+        private string GenerateToken(User user)
+        {
+            var _config = ConfigurationManager.AppSettings;
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWTKey"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var permClaims =new List<Claim>();
+            permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+            permClaims.Add(new Claim("userid",user.UserId.ToString()));
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier,Convert.ToString(user.UserId)),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
+            var token = new JwtSecurityToken(_config["JwtIssuer"],
+                _config["JwtIssuer"],
+                permClaims,
+                expires: DateTime.Now.AddHours(24),
+                signingCredentials: credentials);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+            
+        }
 
         //Additional
 
@@ -88,26 +132,6 @@ namespace HospitalManagementAPI.Services
         //    throw new NotImplementedException();
         //}
 
-        //private string GenerateToken(LoginUser user)
-        //{
-        //    //var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:key"]));
-        //    //var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        //    //var claims = new[]
-        //    //{
-        //    //    new Claim(ClaimTypes.NameIdentifier, user.Username),
-        //    //    new Claim(ClaimTypes.Email, user.Email),
-        //    //    new Claim(ClaimTypes.Role, user.Role)
-        //    //};
-
-        //    //var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-        //    //    _config["Jwt:Audience"],
-        //    //    claims,
-        //    //    expires: DateTime.Now.AddMinutes(100),
-        //    //    signingCredentials: credentials);
-        //    //return new JwtSecurityTokenHandler().WriteToken(token);
-        //    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUZXN0S2V5IiwibmFtZSI6Ikhvc3BpdGFsTWFuYWdlbWVudCIsImlhdCI6MTUxNjIzOTAyMn0.Kb1ppZCl1S2lbYm80aHlp35-brcKBUPRr7yIW-HZ2Gw";
-        //}
 
         //private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         //{
