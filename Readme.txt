@@ -1,5 +1,11 @@
 ﻿Welcome to Hospital Management API" 
  
+To Test in Local :
+
+1. Import the HospitalManagementDB to your Local Server
+2. Visual Studio -> Tools -> Package Manager Console -> command "Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r"
+3. update your DB Con string in Web.config
+
 Endpoints :
 
    * POST: api/User(LOGIN) 
